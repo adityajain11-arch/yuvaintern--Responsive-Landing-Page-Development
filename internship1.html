@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillora | MSME Registered Remote Internships Platform</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --emerald-primary: #059669;
+            --emerald-hover: #047857;
+            --mint-light: #ecfdf5;
+            --sage-accent: #d1fae5;
+            --text-dark: #064e3b;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f6fbf8;
+            color: #1e293b;
+        }
+
+        /* Glassmorphism Navigation */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.15);
+        }
+
+        /* Custom Hover & Card Animations */
+        .track-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .track-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(5, 150, 105, 0.12), 0 8px 10px -6px rgba(5, 150, 105, 0.08);
+            border-color: #34d399;
+        }
+
+        /* Tab Panels */
+        .tab-panel {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .tab-panel.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- =================================================================== -->
+    <!-- HEADER & NAVIGATION                                                 -->
+    <!-- =================================================================== -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Logo & MSME Badge -->
+                <a href="#" class="flex items-center gap-3 focus:outline-none group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-graduation-cap text-lg"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors">
+                            Skill<span class="text-emerald-600">ora</span>
+                        </span>
+                        <span class="text-[10px] font-semibold tracking-wider text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded border border-emerald-200 uppercase w-max">
+                            <i class="fa-solid fa-award text-[9px] mr-1"></i>MSME Registered
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-700">
+                    <a href="#tracks" class="hover:text-emerald-600 transition-colors">Internships</a>
+                    <a href="#how-it-works" class="hover:text-emerald-600 transition-colors">How It Works</a>
+                    <a href="#perks" class="hover:text-emerald-600 transition-colors">Perks & Benefits</a>
+                    <a href="#reviews" class="hover:text-emerald-600 transition-colors">Reviews</a>
+                    <a href="#faq" class="hover:text-emerald-600 transition-colors">FAQ</a>
+                </nav>
+
+                <!-- Desktop Action Button -->
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="#tracks" class="px-5 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition-all duration-300 shadow-lg shadow-emerald-600/20 hover:shadow-emerald-600/35 hover:-translate-y-0.5">
+                        Apply Now
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" aria-label="Toggle Mobile Menu" class="p-2.5 rounded-lg text-slate-700 hover:text-emerald-600 hover:bg-emerald-50 focus:outline-none transition-colors">
+                        <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-xl border-b border-emerald-100 transition-all duration-300">
+            <div class="px-4 pt-4 pb-6 space-y-3">
+                <a href="#tracks" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">Internships</a>
+                <a href="#how-it-works" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">How It Works</a>
+                <a href="#perks" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">Perks & Benefits</a>
+                <a href="#reviews" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">Reviews</a>
+                <a href="#faq" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">FAQ</a>
+                <div class="pt-4 border-t border-slate-100 flex flex-col gap-3">
+                    <a href="#tracks" class="mobile-nav-link w-full text-center px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-md">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+        <!-- =================================================================== -->
+        <!-- HERO SECTION                                                        -->
+        <!-- =================================================================== -->
+        <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden bg-gradient-to-b from-emerald-50/60 via-emerald-50/20 to-transparent">
+            <!-- Background Glow Circles -->
+            <div class="absolute top-10 right-10 w-96 h-96 bg-emerald-200/40 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-0 left-10 w-80 h-80 bg-teal-200/30 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Hero Intro -->
+                    <div class="lg:col-span-7 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100/80 border border-emerald-200 text-xs font-bold text-emerald-800 mb-6 shadow-sm">
+                            <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Govt. MSME Recognized Internship Partner
+                        </div>
+
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+                            Kickstart Your Career with <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-800">Real-World Remote Internships</span>
+                        </h1>
+
+                        <p class="text-lg text-slate-600 font-normal leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
+                            Gain practical industry experience, work on real client projects, receive 1-on-1 mentorship, and earn verified credentials with Skillora.
+                        </p>
+
+                        <!-- CTA Group -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
+                            <a href="#tracks" class="w-full sm:w-auto px-8 py-4 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base transition-all duration-300 shadow-xl shadow-emerald-600/25 hover:scale-105 text-center">
+                                Explore Open Internships
+                            </a>
+                            <a href="#how-it-works" class="w-full sm:w-auto px-8 py-4 rounded-full bg-white hover:bg-emerald-50 border border-emerald-200 text-emerald-800 font-semibold text-base transition-all duration-300 text-center flex items-center justify-center gap-2 shadow-sm">
+                                <i class="fa-solid fa-circle-play text-emerald-600"></i>
+                                Learn How It Works
+                            </a>
+                        </div>
+
+                        <!-- Live Metrics Banner -->
+                        <div class="grid grid-cols-3 gap-4 pt-6 border-t border-emerald-200/60 max-w-lg mx-auto lg:mx-0">
+                            <div class="text-center lg:text-left">
+                                <div class="text-2xl sm:text-3xl font-extrabold text-emerald-700">5,000+</div>
+                                <div class="text-xs text-slate-500 font-medium">Interns Trained</div>
+                            </div>
+                            <div class="text-center lg:text-left">
+                                <div class="text-2xl sm:text-3xl font-extrabold text-emerald-700">6+</div>
+                                <div class="text-xs text-slate-500 font-medium">Domain Tracks</div>
+                            </div>
+                            <div class="text-center lg:text-left">
+                                <div class="text-2xl sm:text-3xl font-extrabold text-emerald-700">98%</div>
+                                <div class="text-xs text-slate-500 font-medium">Satisfaction Rate</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Hero Interactive Visual Card -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-emerald-100 shadow-2xl shadow-emerald-950/5 relative">
+                            <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
+                                    <span class="font-bold text-slate-800 text-sm">Active Internship Cohort</span>
+                                </div>
+                                <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                                    Enrollment Open
+                                </span>
+                            </div>
+
+                            <!-- Featured Domain Cards inside Hero -->
+                            <div class="space-y-3">
+                                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between hover:bg-emerald-50/50 transition-colors">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                                            <i class="fa-solid fa-code"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-sm font-bold text-slate-800">Frontend & Web Dev</h4>
+                                            <span class="text-xs text-slate-500">HTML, Tailwind, React</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-medium text-emerald-700 bg-white px-2 py-1 rounded border border-emerald-100">4 Weeks</span>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between hover:bg-emerald-50/50 transition-colors">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center font-bold">
+                                            <i class="fa-solid fa-pen-nib"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-sm font-bold text-slate-800">UI/UX Design</h4>
+                                            <span class="text-xs text-slate-500">Figma, Wireframing</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-medium text-emerald-700 bg-white px-2 py-1 rounded border border-emerald-100">4 Weeks</span>
+                                </div>
+
+                                <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between hover:bg-emerald-50/50 transition-colors">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-9 h-9 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                                            <i class="fa-solid fa-video"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-sm font-bold text-slate-800">Video Editing & Motion</h4>
+                                            <span class="text-xs text-slate-500">Premiere Pro, Reels</span>
+                                        </div>
+                                    </div>
+                                    <span class="text-xs font-medium text-emerald-700 bg-white px-2 py-1 rounded border border-emerald-100">4 Weeks</span>
+                                </div>
+                            </div>
+
+                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                                <span><i class="fa-solid fa-shield-check text-emerald-600 mr-1"></i> ISO & MSME Certified</span>
+                                <span><i class="fa-solid fa-laptop text-emerald-600 mr-1"></i> 100% Remote Work</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- INTERNSHIP TRACKS / DOMAINS SECTION                                 -->
+        <!-- =================================================================== -->
+        <section id="tracks" class="py-20 bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-700 mb-3 bg-emerald-100/70 inline-block px-3 py-1 rounded-full">Explore Opportunities</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-slate-900">Featured Remote Internship Domains</p>
+                    <p class="text-slate-600 mt-4 text-base">Select your field of interest and gain hands-on practical exposure on live industry projects.</p>
+                </div>
+
+                <!-- Domain Filter Tabs -->
+                <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12">
+                    <button class="domain-filter active px-5 py-2.5 rounded-full text-sm font-bold border transition-all duration-300 bg-emerald-600 border-emerald-600 text-white shadow-md shadow-emerald-600/20" data-filter="all">All Domains</button>
+                    <button class="domain-filter px-5 py-2.5 rounded-full text-sm font-bold border transition-all duration-300 bg-slate-50 border-slate-200 text-slate-600 hover:bg-emerald-50 hover:text-emerald-700" data-filter="dev">Development</button>
+                    <button class="domain-filter px-5 py-2.5 rounded-full text-sm font-bold border transition-all duration-300 bg-slate-50 border-slate-200 text-slate-600 hover:bg-emerald-50 hover:text-emerald-700" data-filter="design">Design & Creative</button>
+                    <button class="domain-filter px-5 py-2.5 rounded-full text-sm font-bold border transition-all duration-300 bg-slate-50 border-slate-200 text-slate-600 hover:bg-emerald-50 hover:text-emerald-700" data-filter="media">Content & Media</button>
+                </div>
+
+                <!-- Domain Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Track 1: Frontend Development -->
+                    <div class="track-card domain-item dev p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex flex-col justify-between" data-category="dev">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl font-bold mb-6">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">Development</span>
+                                <span class="text-xs font-medium text-slate-500"><i class="fa-regular fa-clock mr-1"></i> 1 Month</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Frontend Development</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                Work on modern responsive web pages using HTML5, CSS3, Tailwind CSS, JavaScript, and ReactJS frameworks.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">HTML/CSS</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">JavaScript</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">React</span>
+                            </div>
+                        </div>
+                        <a href="#apply" class="w-full text-center py-3 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white font-bold text-sm transition-colors">Apply for Frontend</a>
+                    </div>
+
+                    <!-- Track 2: Backend Development -->
+                    <div class="track-card domain-item dev p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex flex-col justify-between" data-category="dev">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center text-xl font-bold mb-6">
+                                <i class="fa-solid fa-server"></i>
+                            </div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-bold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-md border border-teal-100">Development</span>
+                                <span class="text-xs font-medium text-slate-500"><i class="fa-regular fa-clock mr-1"></i> 1 Month</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Backend Development</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                Build secure RESTful APIs, manage databases, and learn server logic using Node.js, Express, and MongoDB.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Node.js</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Express</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">MongoDB</span>
+                            </div>
+                        </div>
+                        <a href="#apply" class="w-full text-center py-3 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white font-bold text-sm transition-colors">Apply for Backend</a>
+                    </div>
+
+                    <!-- Track 3: Full-Stack Development -->
+                    <div class="track-card domain-item dev p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex flex-col justify-between" data-category="dev">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl font-bold mb-6">
+                                <i class="fa-solid fa-layer-group"></i>
+                            </div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">Development</span>
+                                <span class="text-xs font-medium text-slate-500"><i class="fa-regular fa-clock mr-1"></i> 1-2 Months</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Full-Stack Development</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                Combine client-side and server-side expertise to deploy end-to-end web applications independently.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">MERN Stack</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">REST API</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Git</span>
+                            </div>
+                        </div>
+                        <a href="#apply" class="w-full text-center py-3 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white font-bold text-sm transition-colors">Apply for Full-Stack</a>
+                    </div>
+
+                    <!-- Track 4: UI/UX Design -->
+                    <div class="track-card domain-item design p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex flex-col justify-between" data-category="design">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl font-bold mb-6">
+                                <i class="fa-solid fa-pen-nib"></i>
+                            </div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">Design</span>
+                                <span class="text-xs font-medium text-slate-500"><i class="fa-regular fa-clock mr-1"></i> 1 Month</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">UI/UX Design</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                Craft user-centric wireframes, interactive prototypes, and modern UI systems using Figma and Adobe XD.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Figma</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Wireframing</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Prototyping</span>
+                            </div>
+                        </div>
+                        <a href="#apply" class="w-full text-center py-3 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white font-bold text-sm transition-colors">Apply for UI/UX</a>
+                    </div>
+
+                    <!-- Track 5: Content Writing -->
+                    <div class="track-card domain-item media p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex flex-col justify-between" data-category="media">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center text-xl font-bold mb-6">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-bold text-teal-700 bg-teal-50 px-2.5 py-1 rounded-md border border-teal-100">Media</span>
+                                <span class="text-xs font-medium text-slate-500"><i class="fa-regular fa-clock mr-1"></i> 1 Month</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Content Writing</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                Master SEO copywriting, blog posts, social media captions, and technical documentation strategies.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">SEO Writing</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Copywriting</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Blogs</span>
+                            </div>
+                        </div>
+                        <a href="#apply" class="w-full text-center py-3 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white font-bold text-sm transition-colors">Apply for Writing</a>
+                    </div>
+
+                    <!-- Track 6: Video Editing -->
+                    <div class="track-card domain-item media p-8 rounded-2xl bg-white border border-slate-200/80 shadow-sm flex flex-col justify-between" data-category="media">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl font-bold mb-6">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-100">Media</span>
+                                <span class="text-xs font-medium text-slate-500"><i class="fa-regular fa-clock mr-1"></i> 1 Month</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-3">Video Editing</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                Produce engaging short-form reels, promotional videos, motion graphics, and sound editing.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Premiere Pro</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">Reels/Shorts</span>
+                                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded">CapCut</span>
+                            </div>
+                        </div>
+                        <a href="#apply" class="w-full text-center py-3 rounded-xl bg-slate-900 hover:bg-emerald-600 text-white font-bold text-sm transition-colors">Apply for Video Editing</a>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- WHY CHOOSE SKILLORA / PERKS SECTION                                 -->
+        <!-- =================================================================== -->
+        <section id="perks" class="py-20 bg-emerald-50/50 relative border-t border-b border-emerald-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-700 mb-3 bg-emerald-100 inline-block px-3 py-1 rounded-full">Student Perks</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-slate-900">Why Build Your Internship with Skillora?</p>
+                    <p class="text-slate-600 mt-4 text-base">We prioritize real hands-on learning, flexible hours, and career-boosting certifications.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- Perk 1 -->
+                    <div class="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm text-center">
+                        <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl font-bold mx-auto mb-5">
+                            <i class="fa-solid fa-file-contract"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Offer Letter</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Official Offer Letter provided immediately upon enrollment to validate your internship status.</p>
+                    </div>
+
+                    <!-- Perk 2 -->
+                    <div class="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm text-center">
+                        <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl font-bold mx-auto mb-5">
+                            <i class="fa-solid fa-certificate"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Verified Certificate</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">MSME & ISO verified Certificate of Completion with verifiable credentials for LinkedIn.</p>
+                    </div>
+
+                    <!-- Perk 3 -->
+                    <div class="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm text-center">
+                        <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl font-bold mx-auto mb-5">
+                            <i class="fa-solid fa-house-laptop"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">100% Remote & Flexible</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Work from anywhere with flexible timing designed to fit alongside college schedules.</p>
+                    </div>
+
+                    <!-- Perk 4 -->
+                    <div class="bg-white p-6 rounded-2xl border border-emerald-100 shadow-sm text-center">
+                        <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl font-bold mx-auto mb-5">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Mentorship Support</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">Get guidance from experienced mentors to clear doubts and review project deliverables.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- STUDENT REVIEWS / TESTIMONIALS SECTION                              -->
+        <!-- =================================================================== -->
+        <section id="reviews" class="py-20 bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-emerald-700 mb-3 bg-emerald-100 inline-block px-3 py-1 rounded-full">Success Stories</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-slate-900">What Our Interns Say</p>
+                    <p class="text-slate-600 mt-4 text-base">Hear directly from students who boosted their skillsets and resumes with Skillora.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Review 1 -->
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                                "Skillora gave me the confidence to code real React projects. The flexible deadlines made it super easy to manage along with my final semester exams!"
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-slate-200/60">
+                            <div class="w-10 h-10 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-sm">
+                                AR
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800">Ananya Rao</h4>
+                                <span class="text-xs text-slate-500">Frontend Intern • CS Student</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                                "The UI/UX tasks were structured really well. I added two complete case studies to my portfolio which helped me land my first full-time role."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-slate-200/60">
+                            <div class="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-sm">
+                                PS
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800">Priya Sharma</h4>
+                                <span class="text-xs text-slate-500">UI/UX Intern • Design Graduate</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-6 italic">
+                                "The verified MSME certificate and letter of recommendation were valid for my college submission. Great guidance from mentors!"
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-slate-200/60">
+                            <div class="w-10 h-10 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-sm">
+                                KV
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold text-slate-800">Karthik Verma</h4>
+                                <span class="text-xs text-slate-500">Video Editing Intern • Media Student</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================== -->
+        <!-- FOOTER SECTION                                                      -->
+        <!-- =================================================================== -->
+        <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-sm pt-16 pb-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                    
+                    <!-- Skillora Brand Info -->
+                    <div>
+                        <a href="#" class="flex items-center gap-3 mb-4">
+                            <div class="w-9 h-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
+                                <i class="fa-solid fa-graduation-cap text-base"></i>
+                            </div>
+                            <span class="text-lg font-extrabold text-white">Skillora</span>
+                        </a>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            MSME Registered remote internship platform bridging the gap between student learning and industry requirements.
+                        </p>
+                        <span class="inline-block text-[11px] font-semibold text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-2.5 py-1 rounded">
+                            Govt. MSME Reg. No: UDYAM-XX-00000
+                        </span>
+                    </div>
+
+                    <!-- Links Column 1 -->
+                    <div>
+                        <h4 class="text-white font-semibold text-sm mb-4">Domain Tracks</h4>
+                        <ul class="space-y-2.5 text-xs">
+                            <li><a href="#tracks" class="hover:text-emerald-400 transition-colors">Frontend Development</a></li>
+                            <li><a href="#tracks" class="hover:text-emerald-400 transition-colors">Backend Development</a></li>
+                            <li><a href="#tracks" class="hover:text-emerald-400 transition-colors">Full-Stack Web Dev</a></li>
+                            <li><a href="#tracks" class="hover:text-emerald-400 transition-colors">UI/UX Design</a></li>
+                            <li><a href="#tracks" class="hover:text-emerald-400 transition-colors">Content Writing</a></li>
+                            <li><a href="#tracks" class="hover:text-emerald-400 transition-colors">Video Editing</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Links Column 2 -->
+                    <div>
+                        <h4 class="text-white font-semibold text-sm mb-4">Quick Links</h4>
+                        <ul class="space-y-2.5 text-xs">
+                            <li><a href="#how-it-works" class="hover:text-emerald-400 transition-colors">How It Works</a></li>
+                            <li><a href="#perks" class="hover:text-emerald-400 transition-colors">Perks & Benefits</a></li>
+                            <li><a href="#reviews" class="hover:text-emerald-400 transition-colors">Student Reviews</a></li>
+                            <li><a href="#" class="hover:text-emerald-400 transition-colors">Verify Certificate</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact & Support -->
+                    <div>
+                        <h4 class="text-white font-semibold text-sm mb-4">Contact Us</h4>
+                        <ul class="space-y-3 text-xs">
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-envelope text-emerald-400"></i> support@skillora.in
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <i class="fa-solid fa-location-dot text-emerald-400"></i> Remote / PAN India Operations
+                            </li>
+                        </ul>
+                        <div class="flex gap-3 mt-6">
+                            <a href="#" aria-label="LinkedIn" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:text-emerald-400 hover:bg-slate-700 transition-colors">
+                                <i class="fa-brands fa-linkedin-in text-xs"></i>
+                            </a>
+                            <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:text-emerald-400 hover:bg-slate-700 transition-colors">
+                                <i class="fa-brands fa-instagram text-xs"></i>
+                            </a>
+                            <a href="#" aria-label="Twitter" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-300 hover:text-emerald-400 hover:bg-slate-700 transition-colors">
+                                <i class="fa-brands fa-x-twitter text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
+                    <div>
+                        &copy; 2026 Skillora. All rights reserved. MSME Registered Entity.
+                    </div>
+                    <div class="flex gap-6">
+                        <a href="#" class="hover:text-emerald-400 transition-colors">Privacy Policy</a>
+                        <a href="#" class="hover:text-emerald-400 transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </main>
+
+    <!-- =================================================================== -->
+    <!-- INTERACTIVE JAVASCRIPT                                             -->
+    <!-- =================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle logic
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.contains('hidden');
+                if (isHidden) {
+                    mobileMenu.classList.remove('hidden');
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-xmark');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                }
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+
+            // Domain Filter Tabs logic
+            const filterBtns = document.querySelectorAll('.domain-filter');
+            const domainItems = document.querySelectorAll('.domain-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-emerald-600', 'border-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-600/20');
+                        b.classList.add('bg-slate-50', 'border-slate-200', 'text-slate-600');
+                    });
+
+                    btn.classList.remove('bg-slate-50', 'border-slate-200', 'text-slate-600');
+                    btn.classList.add('bg-emerald-600', 'border-emerald-600', 'text-white', 'shadow-md', 'shadow-emerald-600/20');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    domainItems.forEach(item => {
+                        if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
